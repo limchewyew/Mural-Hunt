@@ -1,0 +1,195 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f8f8f8;
+}
+header {
+  width: 100vw;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7em 0 0.2em 0;
+}
+header h1 {
+  margin: 0 0 0.2em 0;
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #222;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+#map {
+  height: 50vh;
+  width: 100vw;
+  position: relative;
+  margin-top: 60px;
+}
+.leaflet-popup-content {
+  min-width: 200px;
+  max-width: 250px;
+  font-size: 1rem;
+}
+.leaflet-popup-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+#guess-box {
+  width: 100vw;
+  max-width: 500px;
+  margin: 24px auto 0 auto;
+  padding: 1.2em 1em 1.5em 1em;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#guess-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+#guess-form label {
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 0.2em;
+}
+#guess-input {
+  padding: 0.7em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+#guess-form button {
+  padding: 0.7em;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#guess-form button:hover {
+  background: #444;
+}
+#guess-result {
+  margin-top: 1em;
+  font-size: 1.1em;
+  color: #007b5e;
+  min-height: 1.2em;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin: 0.5em 0 0.5em 0;
+  background: #f6f6f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 0.3em 0.7em;
+  z-index: 1001;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  font-size: 1em;
+  font-weight: 600;
+  color: #888;
+  padding: 0.5em 1.2em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  outline: none;
+}
+.tab-btn.active {
+  background: #fff;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.tab-btn:focus {
+  outline: 2px solid #007b5e;
+}
+.tab-content {
+  display: none;
+  padding: 0;
+}
+.tab-content.active {
+  display: block;
+}
+.howto-content {
+  max-width: 600px;
+  margin: 32px auto 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 2em 1.5em 2em 1.5em;
+  font-size: 1.1em;
+  color: #222;
+}
+.howto-content h2 {
+  margin-top: 0;
+  font-size: 1.3em;
+  font-weight: 700;
+  text-align: center;
+}
+.howto-content ol {
+  margin: 1em 0 1em 1.2em;
+}
+main {
+  margin-top: 120px;
+}
+@media (max-width: 600px) {
+  .leaflet-popup-content {
+    min-width: 140px;
+    max-width: 90vw;
+    font-size: 0.95rem;
+  }
+  #map {
+    height: 50vh;
+    width: 100vw;
+    margin-top: 48px;
+  }
+  header h1 {
+    font-size: 1.1em;
+  }
+  #guess-box {
+    max-width: 95vw;
+    padding: 1em 0.5em 1.2em 0.5em;
+  }
+  .howto-content {
+    max-width: 98vw;
+    padding: 1.2em 0.5em 1.2em 0.5em;
+    font-size: 1em;
+  }
+  .tabs {
+    gap: 0.5em;
+    padding: 0.2em 0.2em;
+    border-radius: 8px;
+  }
+  .tab-btn {
+    font-size: 0.98em;
+    padding: 0.5em 0.7em;
+    border-radius: 6px;
+  }
+  main {
+    margin-top: 100px;
+  }
+} 
