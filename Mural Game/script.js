@@ -58,7 +58,7 @@ const locations = [
   {
     name: 'Phoenix',
     coords: [1.3021298890740542, 103.8594970100109],
-    description: "A phoenix is an imaginary bird that, according to ancient stories, burns itself to ashes every five hundred years and is then born again.",
+    description: "An imaginary bird that, according to ancient stories, burns itself to ashes every five hundred years and is then born again.",
     image: 'images/Phoenix.jpg',
     number: 9
   }
