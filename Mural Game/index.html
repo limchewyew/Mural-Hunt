@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mural Game Map</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <header>
+    <h1>Kampung Gelam Mural Hunt</h1>
+  </header>
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="map">Map</button>
+    <button class="tab-btn" data-tab="howto">How to play</button>
+  </nav>
+  <main>
+    <section id="tab-map" class="tab-content active">
+      <div id="map"></div>
+      <div id="marker-details" style="max-width:500px;margin:24px auto 0 auto;"></div>
+    </section>
+    <section id="tab-howto" class="tab-content">
+      <div class="howto-content">
+        <h2>How to play</h2>
+        <ol>
+          <li>Explore the map and tap on each mural or attraction pin to reveal a hint.</li>
+          <li>Type your guess for each location in the popup textbox.</li>
+          <li>If your guess is correct, the answer will be revealed and locked in for that mural or attraction.</li>
+          <li>Each wrong guess adds a part to the hangman. Complete the hangman and you'll have to restart!</li>
+          <li>Find all the correct answers to win and celebrate your success!</li>
+        </ol>
+        <p>Have fun discovering Kampung Gelam and good luck on your mural hunt!</p>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html> 
