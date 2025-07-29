@@ -34,6 +34,21 @@ header h1 {
   position: relative;
   margin-top: 60px;
 }
+
+#marker-details {
+  width: 100vw;
+  max-width: 500px;
+  margin: 24px auto 0 auto;
+  padding: 1.2em 1em 1.5em 1em;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  display: none;
+}
+
+#marker-details:not(:empty) {
+  display: block;
+}
 .leaflet-popup-content {
   min-width: 200px;
   max-width: 250px;
@@ -96,6 +111,47 @@ header h1 {
   color: #007b5e;
   min-height: 1.2em;
 }
+
+.guess-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  margin-top: 1em;
+}
+
+.guess-input {
+  padding: 0.7em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.guess-form button {
+  padding: 0.7em;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.guess-form button:hover {
+  background: #444;
+}
+
+.guess-result {
+  margin-top: 0.5em;
+  font-size: 1em;
+  min-height: 1.2em;
+}
+
+
 .tabs {
   display: flex;
   justify-content: center;
@@ -171,6 +227,10 @@ main {
     font-size: 1.1em;
   }
   #guess-box {
+    max-width: 95vw;
+    padding: 1em 0.5em 1.2em 0.5em;
+  }
+  #marker-details {
     max-width: 95vw;
     padding: 1em 0.5em 1.2em 0.5em;
   }
