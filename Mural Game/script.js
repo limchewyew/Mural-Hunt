@@ -37,21 +37,21 @@ const locations = [
   {
     name: 'Aztec',
     coords: [1.3001183212286607, 103.85956204655417],
-    description: "They were an ancient civilization in Mexico known for their powerful empire and grand temples. The Aztecs are also famous for their warriors, intricate art, and worship of many gods.",
+    description: "They were an ancient civilization in Mexico known for their powerful empire and grand temples. They are also famous for their warriors, intricate art, and worship of many gods.",
     image: 'images/Aztec.jpg',
     number: 6
   },
   {
     name: 'Kampung',
     coords: [1.3016360303489687, 103.85895230987227],
-    description: "It’s a Malay word meaning “village,” often used to describe traditional rural communities. In Singapore and Malaysia, kampungs are known for their close-knit neighbors and simple way of life.",
+    description: "It’s a Malay word meaning “village,” often used to describe traditional rural communities. In Singapore and Malaysia, these places are known for their close-knit neighbors and simple way of life.",
     image: 'images/Kampung.jpg',
     number: 7
   },
   {
     name: 'Wedding',
     coords: [1.3024320397682627, 103.85966590601592],
-    description: "It’s a traditional celebration rich with customs like the bersanding ceremony, where the bride and groom sit on a decorated dais. Malay weddings often feature vibrant attire, cultural performances, and a grand feast called the kenduri.",
+    description: "It’s a traditional celebration rich with customs like the bersanding ceremony, where the bride and groom sit on a decorated dais. Malay ______ often feature vibrant attire, cultural performances, and a grand feast called the kenduri.",
     image: 'images/Wedding.jpg',
     number: 8
   },
