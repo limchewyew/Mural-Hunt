@@ -61,6 +61,27 @@ const locations = [
     description: "An imaginary bird that, according to ancient stories, burns itself to ashes every five hundred years and is then born again.",
     image: 'images/Phoenix.jpg',
     number: 9
+  },
+  {
+    name: 'Vintage Camera Museum',
+    coords: [1.3035450744003545, 103.85896463553551],
+    description: "A unique museum showcasing vintage cameras and photography equipment from different eras. It's a fascinating place for photography enthusiasts and history buffs.",
+    image: 'images/Vintage Camera Museum.jpg',
+    number: 10
+  },
+  {
+    name: 'Golden Landmark Shopping Complex',
+    coords: [1.3022776388010917, 103.858090912164],
+    description: "A shopping center known for its golden facade and diverse retail offerings. It's a popular destination for locals and tourists looking for various goods and services.",
+    image: 'images/Golden Landmark Shopping Complex.jpg',
+    number: 11
+  },
+  {
+    name: 'The Blackbook Studio',
+    coords: [1.3022299274744695, 103.86059141843883],
+    description: "A creative studio space where artists and designers work on various projects. It's a hub for artistic expression and collaboration in the local community.",
+    image: 'images/The Blackbook Studio.jpg',
+    number: 12
   }
 ];
 
@@ -73,7 +94,10 @@ const answers = {
   6: 'Aztec',
   7: 'Kampung',
   8: 'Wedding',
-  9: 'Phoenix'
+  9: 'Phoenix',
+  10: 'Vintage Camera Museum',
+  11: 'Golden Landmark Shopping Complex',
+  12: 'The Blackbook Studio'
 };
 
 const map = L.map('map').setView([1.3027748202508007, 103.85841118326272], 16);
@@ -91,7 +115,7 @@ const maxWrong = 10;
 const correctAnswers = {};
 
 function checkAllCorrect() {
-  // There are 8 murals/attractions
+  // There are 12 murals/attractions
   return Object.keys(answers).every(num => correctAnswers[num]);
 }
 
@@ -155,22 +179,55 @@ function showConfetti() {
 
 locations.forEach(loc => {
   const isAttraction = loc.number === 5;
-  const label = isAttraction ? `Attraction #${loc.number}` : `Mural #${loc.number}`;
+  const isSpecialLocation = loc.number === 10 || loc.number === 11 || loc.number === 12; // Vintage Camera Museum, Golden Landmark, Blackbook Studio
+  
+  // Create custom icon for special locations (red pins)
+  let customIcon;
+  if (isSpecialLocation) {
+    customIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34]
+    });
+  } else {
+    // Default blue pin for regular locations
+    customIcon = L.icon({
+      iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34]
+    });
+  }
+  
+  const label = isAttraction ? `Attraction #${loc.number}` : `Attraction #${loc.number}`;
   const answer = answers[loc.number];
   const letterHint = answer ? ` (${answer.length} letters${answer.includes(' ') ? ', includes space' : ''})` : '';
-  const detailsContent = `
-    <strong>${label}</strong><br>
-    <img src="${loc.image}" alt="${loc.name}" style="width:100%;border-radius:8px;margin:8px 0;max-height:120px;object-fit:cover;" />
-    <span>${loc.description}</span><br>
-    <em>Answer length: ${letterHint}</em><br><br>
-    <form class="guess-form" data-mural="${loc.number}">
-      <input type="text" class="guess-input" placeholder="Your guess..." autocomplete="off" required style="width: 90%; margin-bottom: 0.5em;" />
-      <button type="submit" style="width: 100%;">Submit</button>
-      <div class="guess-result" style="margin-top: 0.5em; min-height: 1.2em;"></div>
-    </form>
-    <canvas class="hangman-canvas" width="120" height="120" style="display:block;margin:10px auto 0 auto;background:#f8f8f8;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06);"></canvas>
+  const detailsContent = isSpecialLocation ? `
+    <div style="width:80%;max-width:300px;margin:0 auto;">
+      <strong>${label}</strong><br>
+      <img src="${loc.image}" alt="${loc.name}" style="width:100%;border-radius:8px;margin:12px 0;max-height:220px;object-fit:cover;display:block;" />
+      <span><strong>${loc.name}:</strong> ${loc.description}</span><br><br>
+      <div style="background:#f0f8ff;padding:1em;border-radius:8px;border-left:4px solid #007b5e;margin:1em 0;">
+        <strong style="color:#007b5e;">📸 Photo Challenge!</strong><br>
+        <span style="font-size:0.9em;">Take a wefie or photo of this location!</span>
+      </div>
+    </div>
+  ` : `
+    <div style="width:80%;max-width:300px;margin:0 auto;">
+      <strong>${label}</strong><br>
+      <img src="${loc.image}" alt="${loc.name}" style="width:100%;border-radius:8px;margin:12px 0;max-height:220px;object-fit:cover;display:block;" />
+      <span>${loc.description}</span><br>
+      <em>Answer length: ${letterHint}</em><br><br>
+      <form class="guess-form" data-mural="${loc.number}">
+        <input type="text" class="guess-input" placeholder="Your guess..." autocomplete="off" required style="width: 100%; margin-bottom: 0.8em;" />
+        <button type="submit" style="width: 100%;">Submit</button>
+        <div class="guess-result" style="margin-top: 0.8em; min-height: 1.2em;"></div>
+      </form>
+    </div>
+    <canvas class="hangman-canvas" width="120" height="120" style="display:block;margin:15px auto 0 auto;background:#f8f8f8;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06);"></canvas>
   `;
-  const marker = L.marker(loc.coords).addTo(map);
+  const marker = L.marker(loc.coords, { icon: customIcon }).addTo(map);
   marker.on('click', function() {
     // Show details below the map
     const details = document.getElementById('marker-details');
