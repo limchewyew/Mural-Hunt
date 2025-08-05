@@ -115,8 +115,8 @@ const maxWrong = 10;
 const correctAnswers = {};
 
 function checkAllCorrect() {
-  // There are 12 murals/attractions
-  return Object.keys(answers).every(num => correctAnswers[num]);
+  // Only check the 9 locations with text input forms (excluding photo-only locations 10, 11, 12)
+  return [1, 2, 3, 4, 5, 6, 7, 8, 9].every(num => correctAnswers[num]);
 }
 
 function showConfetti() {
