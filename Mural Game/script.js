@@ -369,14 +369,13 @@ function onLocationFound(e) {
     map.removeLayer(userLocationCircle);
   }
   
-  // Create new location marker
+  // Create new location marker (without popup)
   userLocationMarker = L.marker(e.latlng, {icon: L.icon({
     iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32]
-  })}).addTo(map)
-    .bindPopup("You are here").openPopup();
+  })}).addTo(map);
 }
 
 function onLocationError(e) {
@@ -430,7 +429,7 @@ map.on('locationerror', onLocationError);
 
 // Try to locate with longer timeout and better options
 map.locate({
-  setView: true, 
+  setView: false, 
   maxZoom: 17, 
   watch: true,
   timeout: 30000, // 30 seconds timeout
