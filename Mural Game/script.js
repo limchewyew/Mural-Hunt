@@ -357,26 +357,86 @@ document.addEventListener('submit', function(e) {
 // Remove Leaflet popupopen logic for murals (not needed)
 
 // User location tracking
+let userLocationMarker = null;
+let userLocationCircle = null;
+
 function onLocationFound(e) {
-  const radius = e.accuracy / 2;
-  L.marker(e.latlng, {icon: L.icon({
+  // Remove previous location marker and circle if they exist
+  if (userLocationMarker) {
+    map.removeLayer(userLocationMarker);
+  }
+  if (userLocationCircle) {
+    map.removeLayer(userLocationCircle);
+  }
+  
+  // Create new location marker
+  userLocationMarker = L.marker(e.latlng, {icon: L.icon({
     iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32]
   })}).addTo(map)
     .bindPopup("You are here").openPopup();
-  L.circle(e.latlng, radius).addTo(map);
 }
 
 function onLocationError(e) {
-  alert(e.message);
+  console.log('Location error:', e.message);
+  
+  // Show a more user-friendly error message
+  let errorMessage = 'Unable to get your location. ';
+  
+  switch(e.code) {
+    case 1:
+      errorMessage += 'Please allow location access in your browser settings.';
+      break;
+    case 2:
+      errorMessage += 'Location unavailable. Please try again.';
+      break;
+    case 3:
+      errorMessage += 'Location request timed out. Please try again.';
+      break;
+    default:
+      errorMessage += 'Please try refreshing the page.';
+  }
+  
+  // Create a temporary notification instead of an alert
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ff6b6b;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    max-width: 300px;
+    font-size: 14px;
+  `;
+  notification.textContent = errorMessage;
+  document.body.appendChild(notification);
+  
+  // Remove notification after 5 seconds
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.parentNode.removeChild(notification);
+    }
+  }, 5000);
 }
 
 map.on('locationfound', onLocationFound);
 map.on('locationerror', onLocationError);
 
-map.locate({setView: true, maxZoom: 17, watch: true});
+// Try to locate with longer timeout and better options
+map.locate({
+  setView: true, 
+  maxZoom: 17, 
+  watch: true,
+  timeout: 30000, // 30 seconds timeout
+  maximumAge: 60000, // Accept cached location up to 1 minute old
+  enableHighAccuracy: true // Request high accuracy
+});
 
 document.addEventListener('DOMContentLoaded', function() {
   // Tab switching logic
